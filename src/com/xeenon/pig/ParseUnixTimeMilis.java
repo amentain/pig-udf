@@ -12,7 +12,7 @@ public class ParseUnixTimeMilis extends EvalFunc<Tuple> {
     static TupleFactory mTupleFactory = TupleFactory.getInstance();
 
     public Tuple exec(Tuple input) throws PigException {
-        if (input == null || input.size() < 1 || input.get(0) == null)
+        if (input == null || input.size() < 1 || input.isNull(0))
             return null;
 
         try {
@@ -30,7 +30,7 @@ public class ParseUnixTimeMilis extends EvalFunc<Tuple> {
 
         } catch(Exception e){
             System.err.println("Failed to process input; error - " + e.getMessage());
-            throw new PigException("Exception in com.kavanga.pig.ParseUnixTimeMilis <"+ input.toString() +"> == ["+ e.getClass().toString() +"] "+ e.toString(), 1300, PigException.INPUT);
+            throw new PigException("Exception in com.xeenon.pig.ParseUnixTimeMilis <"+ input.toString() +"> == ["+ e.getClass().toString() +"] "+ e.toString(), 1300, PigException.INPUT);
         }
     }
 
