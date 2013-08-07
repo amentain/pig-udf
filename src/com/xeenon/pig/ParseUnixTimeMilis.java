@@ -26,9 +26,15 @@ public class ParseUnixTimeMilis extends EvalFunc<Tuple> {
             output.append(hour.format(dtDate));
 
             return output;
-        } catch(Exception e){
-            System.err.println("Failed to process input; error - " + e.getMessage());
-            throw new PigException("Exception in com.xeenon.pig.ParseUnixTimeMilis <"+ input.toString() +"> == ["+ e.getClass().toString() +"] "+ e.toString(), 1300, PigException.INPUT);
+        } catch(Exception e) {
+            String msg = String.format(
+                    "%s got %s on \"%s\"",
+                    this.getClass().getCanonicalName(),
+                    e.getMessage(),
+                    input.toString()
+                );
+            System.err.println(msg);
+            throw new PigException(msg, e);
         }
     }
 
