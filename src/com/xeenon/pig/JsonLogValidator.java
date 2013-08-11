@@ -28,7 +28,6 @@ public class JsonLogValidator {
 
         Long line = 0l;
         String json;
-        Boolean isValid;
         while ((json = bufferedReader.readLine()) != null) {
             line++;
             if (!validateLine(json)) {
