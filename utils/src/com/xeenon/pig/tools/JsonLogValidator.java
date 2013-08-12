@@ -1,4 +1,4 @@
-package com.xeenon.pig;
+package com.xeenon.pig.tools;
 
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.JsonParser;
