@@ -7,4 +7,7 @@ package com.xeenon.pig.test;
  * Time: 9:16
  */
 public class Test_IP2Long {
+    public Test_IP2Long() {
+
+    }
 }
