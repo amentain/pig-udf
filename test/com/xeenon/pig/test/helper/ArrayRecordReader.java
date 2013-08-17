@@ -13,11 +13,11 @@ import java.nio.charset.Charset;
  * Date: 13.08.13
  * Time: 9:15
  */
-public class RecordReader extends org.apache.hadoop.mapreduce.RecordReader {
+public class ArrayRecordReader extends org.apache.hadoop.mapreduce.RecordReader {
     private String[] lines;
     private int pos = -1;
 
-    public RecordReader(String[] lines) {
+    public ArrayRecordReader(String[] lines) {
         super();
         this.lines = lines;
     }
