@@ -26,6 +26,7 @@ public class inList extends FilterFunc
     private HashSet<String> idList;
     private String cacheFile;
 
+    // TODO: move load to separate class
     public inList (String sFilterFile) throws IOException
     {
         idList = new HashSet<>();
