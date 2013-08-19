@@ -14,12 +14,16 @@ import java.nio.charset.Charset;
  * Time: 9:15
  */
 public class ArrayRecordReader extends org.apache.hadoop.mapreduce.RecordReader {
-    private String[] lines;
+    private Text[] lines;
     private int pos = -1;
 
     public ArrayRecordReader(String[] lines) {
         super();
-        this.lines = lines;
+
+        this.lines = new Text[lines.length];
+        for (int i = 0; i < lines.length; i++) {
+            this.lines[i] = new Text(lines[i].getBytes(Charset.forName("UTF-8")));
+        }
     }
 
     @Override
@@ -38,7 +42,7 @@ public class ArrayRecordReader extends org.apache.hadoop.mapreduce.RecordReader 
 
     @Override
     public Text getCurrentValue() throws IOException, InterruptedException {
-        return new Text(lines[pos].getBytes(Charset.forName("UTF-8")));
+        return lines[pos];
     }
 
     @Override
