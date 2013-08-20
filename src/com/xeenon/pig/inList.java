@@ -43,6 +43,7 @@ public class inList extends FilterFunc
 
         File inFile = new File(sFilterFile);
         try {
+        // TODO: fix for local mode
         // if NullPointerException => Local Mode
             Path[] localCache = DistributedCache.getLocalCacheFiles(conf);
 
