@@ -11,6 +11,7 @@
     <orderEntry type="library" name="org.apache.pig:pig:0.11.1" level="project" />
     <orderEntry type="library" name="org.apache.hadoop:hadoop-core:0.20.2" level="project" />
     <orderEntry type="library" name="org.codehaus.jackson:jackson-core-asl:1.9.11" level="project" />
+    <orderEntry type="library" name="joda-time:joda-time:2.3" level="project" />
   </component>
 </module>
 
