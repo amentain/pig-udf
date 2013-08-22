@@ -25,12 +25,21 @@ public class Test_IP2Long {
     }
 
     @Test
-    public void pig() throws Exception {
+    public void direct() throws Exception {
+        for (Map.Entry<String, Long> entry : ips.entrySet()) {
+            Long ipn = IP2Long.inet_aton(entry.getKey());
+            if (!ipn.equals(entry.getValue())) {
+                throw new Exception("wrong ip conversion");
+            }
+        }
+    }
 
+    @Test
+    public void pig() throws Exception {
         IP2Long ip2Long = new IP2Long();
         for (Map.Entry<String, Long> entry : ips.entrySet()) {
-            Tuple input = tupleFactory.newTuple(1);
-            input.set(0, entry.getKey());
+            Tuple input = tupleFactory.newTuple();
+            input.append(entry.getKey());
 
             Long ipn = ip2Long.exec(input);
             if (!ipn.equals(entry.getValue())) {
