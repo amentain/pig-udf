@@ -23,7 +23,7 @@ public class ParseUnixTimeMilis extends EvalFunc<Tuple> {
 
             Tuple output = mTupleFactory.newTuple();
             output.append(date.format(dtDate));
-            output.append(hour.format(dtDate));
+            output.append(Integer.valueOf(hour.format(dtDate)));
 
             return output;
         } catch(Exception e) {
