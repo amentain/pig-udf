@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="com.xeenon.pig:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/com_xeenon_pig_jar</output-path>
+    <root id="archive" name="com.xeenon.pig.jar">
+      <element id="module-output" name="pig-udf" />
+    </root>
+  </artifact>
+</component>
