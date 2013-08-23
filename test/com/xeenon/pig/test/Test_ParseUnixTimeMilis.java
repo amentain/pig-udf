@@ -37,7 +37,7 @@ public class Test_ParseUnixTimeMilis {
             expect.append(entry.getKey().split(" ")[0]);
             expect.append(Integer.valueOf(entry.getKey().split(" ")[1]));
 
-            Assert.assertEquals("time", expect, result);
+            Assert.assertEquals(expect, result);
         }
     }
 

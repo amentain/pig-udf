@@ -1,6 +1,7 @@
 package com.xeenon.pig.test;
 
 import com.xeenon.pig.IP2Long;
+import junit.framework.Assert;
 import org.apache.pig.data.Tuple;
 import org.apache.pig.data.TupleFactory;
 import org.junit.Test;
@@ -22,15 +23,13 @@ public class Test_IP2Long {
         ips.put("127.0.0.1", 2130706433l);
         ips.put("194.190.116.55", 3267261495l);
         ips.put("5.19.247.253", 85194749l);
+        ips.put("255.255.255.255", 4294967295l);
     }
 
     @Test
     public void direct() throws Exception {
         for (Map.Entry<String, Long> entry : ips.entrySet()) {
-            Long ipn = IP2Long.inet_aton(entry.getKey());
-            if (!ipn.equals(entry.getValue())) {
-                throw new Exception("wrong ip conversion");
-            }
+            Assert.assertEquals(entry.getValue(), IP2Long.inet_aton(entry.getKey()));
         }
     }
 
@@ -41,10 +40,7 @@ public class Test_IP2Long {
             Tuple input = tupleFactory.newTuple();
             input.append(entry.getKey());
 
-            Long ipn = ip2Long.exec(input);
-            if (!ipn.equals(entry.getValue())) {
-                throw new Exception("wrong ip conversion");
-            }
+            Assert.assertEquals(entry.getValue(), ip2Long.exec(input));
         }
     }
 }
