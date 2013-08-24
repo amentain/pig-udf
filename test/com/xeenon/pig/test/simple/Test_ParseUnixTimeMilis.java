@@ -1,4 +1,4 @@
-package com.xeenon.pig.test;
+package com.xeenon.pig.test.simple;
 
 import com.xeenon.pig.ParseUnixTimeMilis;
 import org.apache.pig.data.Tuple;
