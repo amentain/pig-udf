@@ -1,5 +1,6 @@
 package com.xeenon.pig;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.pig.EvalFunc;
 import org.apache.pig.PigException;
 import org.apache.pig.data.Tuple;
@@ -35,9 +36,11 @@ public class IP2Long extends EvalFunc<Long> {
 
     public static Long inet_aton(String dottedIP)
     {
-        String[] addr = dottedIP.split("\\.");
+        if (dottedIP == null)
+            return null;
 
         long num = 0;
+        String[] addr = StringUtils.split(dottedIP, '.');
         for (int i = 0; i < addr.length; i++) {
             int power = 3 - i;
             num += ((Integer.parseInt(addr[i]) % 256) * Math.pow(256, power));
