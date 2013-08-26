@@ -15,26 +15,26 @@ import org.junit.Test;
 public class Test_inList {
     String[] test = {"one", "two", "three", "four", "five"};
     String must = "two,five";
-    String mustNot = "six,seven";
+    String mustNot = "six,seven,abra-kadabra";
 
     @Test
     public void testString() throws Exception {
         inList filterMust = new inList(must, ",");
         inList filterMustNot = new inList(mustNot, ",");
 
-        int mustCount = 0;
-        int mustNotCount = 0;
+        int countMust = 0;
+        int countMustNot = 0;
         Tuple input = TupleFactory.getInstance().newTuple(1);
         for (String str : test) {
             input.set(0, str);
             if (filterMust.exec(input))
-                mustCount++;
+                countMust++;
 
             if (filterMustNot.exec(input))
-                mustNotCount++;
+                countMustNot++;
         }
 
-        Assert.assertEquals("positive filter", mustCount, must.split(",").length);
-        Assert.assertEquals("negative filter", mustNotCount, 0);
+        Assert.assertEquals("positive filter", countMust, must.split(",").length);
+        Assert.assertEquals("negative filter", countMustNot, 0);
     }
 }
