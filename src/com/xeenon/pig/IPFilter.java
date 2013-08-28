@@ -138,5 +138,26 @@ public class IPFilter extends EvalFunc<String> {
             return Range.between(ip, ip);
         }
     }
+
+    public Schema outputSchema(Schema inputSchema)
+    {
+        try {
+            if ((inputSchema == null) || ((inputSchema.size() != 1) && (inputSchema.size() != 1))) {
+                throw new RuntimeException("Expecting 1 inputs, found: " +
+                        ((inputSchema == null) ? 0 : inputSchema.size()));
+            }
+
+            Schema.FieldSchema inputFieldSchema = inputSchema.getField(0);
+            if (inputFieldSchema.type != DataType.CHARARRAY) {
+                throw new RuntimeException("Expecting a CHARARRAY, found data type: " +
+                        DataType.findTypeName(inputFieldSchema.type));
+            }
+
+            return new Schema(new Schema.FieldSchema(null, DataType.CHARARRAY));
+        } catch (FrontendException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
 
