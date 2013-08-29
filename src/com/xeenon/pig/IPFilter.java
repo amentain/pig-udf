@@ -76,7 +76,6 @@ public class IPFilter extends EvalFunc<String> {
             }
             addRange(key, range);
         }
-
     }
 
     @Override
