@@ -40,5 +40,4 @@ public class Test_ParseUnixTimeMilis {
             Assert.assertEquals(expect, result);
         }
     }
-
 }
