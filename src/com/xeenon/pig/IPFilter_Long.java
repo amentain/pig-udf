@@ -1,7 +1,5 @@
 package com.xeenon.pig;
 
-import java.io.IOException;
-
 /**
  * Created with IntelliJ IDEA.
  * User: xeenon
@@ -10,8 +8,6 @@ import java.io.IOException;
  */
 public class IPFilter_Long extends IPFilter {
 
-
 //    public IPFilter (String sFilterFile) throws IOException
-
 
 }
