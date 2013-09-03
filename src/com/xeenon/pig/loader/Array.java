@@ -89,7 +89,7 @@ public class Array<T> extends ArrayList<T> {
                     res.add(null);
 
                 if (tuple.size() != 1)
-                    throw new ParseException(String.format("size of BAG inner TUPLE must be <= 1, but %d found", tuple.size()));
+                    throw new ParseException(String.format("size of BAG's inner TUPLE must be <= 1, but %d found", tuple.size()));
 
                 res.add(valueOf.invoke(null, tuple.get(0).toString()));
             }
