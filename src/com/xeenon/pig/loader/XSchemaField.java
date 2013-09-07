@@ -74,7 +74,7 @@ public class XSchemaField {
     }
 
     public Object valueOf() {
-
+        return new Object();
     }
 
     public String getFieldName() {
