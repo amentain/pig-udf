@@ -4,6 +4,7 @@ import org.apache.pig.data.DataType;
 import org.apache.pig.impl.logicalLayer.schema.Schema;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 /**
  * Created with IntelliJ IDEA.
@@ -14,6 +15,7 @@ import java.lang.reflect.Field;
 public class XSchemaField {
     private String fieldName;
     private Class fieldClass;
+    private Method valueOf;
 
     private XSchema schema = null;
 
@@ -70,6 +72,12 @@ public class XSchemaField {
 
             default:
                 throw new ParseException("unknown data type");
+        }
+
+        try {
+            valueOf = fieldClass.getMethod("valueOf", String.class);
+        } catch (NoSuchMethodException e) {
+            throw new ParseException("can't find valueOf(String)", e);
         }
     }
 
