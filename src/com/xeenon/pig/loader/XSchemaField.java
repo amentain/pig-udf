@@ -4,6 +4,7 @@ import org.apache.pig.data.DataType;
 import org.apache.pig.impl.logicalLayer.schema.Schema;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
@@ -77,12 +78,18 @@ public class XSchemaField {
         try {
             valueOf = fieldClass.getMethod("valueOf", String.class);
         } catch (NoSuchMethodException e) {
-            throw new ParseException("can't find valueOf(String)", e);
+            throw new ParseException(String.format("can't find %s.valueOf(String)", fieldClass.getName()), e);
         }
     }
 
-    public Object valueOf() {
-        return new Object();
+    public Object valueOf(String value) throws ParseException {
+        try {
+            return valueOf.invoke(null, value);
+        } catch (IllegalAccessException e) {
+            throw new ParseException(e);
+        } catch (InvocationTargetException e) {
+            throw new ParseException(e);
+        }
     }
 
     public String getFieldName() {
