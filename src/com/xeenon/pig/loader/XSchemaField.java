@@ -69,7 +69,7 @@ public class XSchemaField {
             case DataType.CHARARRAY:
             case DataType.BIGCHARARRAY:
                 fieldClass = String.class;
-                break;
+                return;
 
             default:
                 throw new ParseException("unknown data type");
@@ -83,6 +83,9 @@ public class XSchemaField {
     }
 
     public Object valueOf(String value) throws ParseException {
+        if (valueOf == null)
+            return value;
+
         try {
             return valueOf.invoke(null, value);
         } catch (IllegalAccessException e) {
