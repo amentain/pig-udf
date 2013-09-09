@@ -106,5 +106,4 @@ public class XSchemaField {
     public XSchema getFieldSchema() {
         return schema;
     }
-
 }
