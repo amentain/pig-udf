@@ -13,14 +13,14 @@ import java.util.LinkedHashMap;
  */
 public class XSchema extends LinkedHashMap<String, XSchemaField> {
 
-    public XSchema(Class cls) {
+    public XSchema(Class cls) throws ParseException {
         super(cls.getFields().length);
         for (Field field : cls.getFields()) {
             put(field.getName(), new XSchemaField(field));
         }
     }
 
-    public XSchema(Schema schema) {
+    public XSchema(Schema schema) throws ParseException {
         super(schema.size());
         for (Schema.FieldSchema fieldSchema : schema.getFields()) {
             put(fieldSchema.alias, new XSchemaField(fieldSchema));
