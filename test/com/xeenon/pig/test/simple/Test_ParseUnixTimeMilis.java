@@ -27,6 +27,7 @@ public class Test_ParseUnixTimeMilis {
         ips.put("2013-09-08 00", 1378584000l);
         ips.put("2013-09-08 01", 1378587600l);
         ips.put("2013-09-08 00", 1378587599l);
+        ips.put("2013-09-11 00", 1378843200l);
     }
 
     @Test
