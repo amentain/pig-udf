@@ -105,7 +105,29 @@ public class JsonLoader extends org.apache.pig.builtin.JsonLoader {
               }
           };
 
+          /*
+          RepublerLoader loader = new RepublerLoader("site_id:int,page_id:int,siteIab:{(iab:chararray)},pageIab:{(iab:chararray)},kvng_cat_id:chararray,blind:chararray,geo_id:int,uid:chararray,ip:chararray,ts:long,ua:chararray,page_url:chararray,page_referer:chararray,time:int,impressions:{(id:chararray,place_id:int,type_id:int,bid_id:chararray,ad_id:chararray,dsp_id:int,frame_id:int,floorPrice:double,iprice:double,oprice:double,imoney:double,omoney:double,currency:chararray)},responses:{(dsp_id:int,frame_id:int,time:int,seats:{(grouped:chararray,bids:{(id:chararray,ad_id:chararray,impid:chararray,price:double,currency:chararray)})})},outsiders:{(impid:chararray,dsp_id:int,frame_id:int)}");
 
+          loader.getSchema(null, null);
+          loader.prepareToRead(reader, null);
+
+          Tuple tuple = loader.getNext();
+
+          Tuple input = TupleFactory.getInstance().newTuple();
+          input.append(tuple.get(14));
+          input.append(tuple.get(15));
+          input.append(tuple.get(16));
+
+          LogCombiner logCombiner = new LogCombiner();
+          Tuple result = logCombiner.exec(input);
+
+          System.err.println(tuple == null ? "NULL" : tuple.toString());
+          System.err.println(result == null ? "NULL" : result.toString());
+
+          */
+    //  } catch (IOException e) {
+    //      e.printStackTrace();
+    //  }
   }
 
 }
