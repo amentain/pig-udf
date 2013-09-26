@@ -37,4 +37,8 @@ public class Test_inList {
         Assert.assertEquals("positive filter", countMust, must.split(",").length);
         Assert.assertEquals("negative filter", countMustNot, 0);
     }
+
+    @Test
+    public void testFile() throws Exception {
+    }
 }
