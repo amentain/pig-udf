@@ -8,6 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.xeenon.pig.helper.CacheHelper;
+import com.xeenon.pig.helper.IPHelper;
 import org.apache.commons.lang3.Range;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.pig.EvalFunc;
@@ -102,7 +103,7 @@ public class IPFilter extends EvalFunc<String> {
         if (input.getType(0) == DataType.LONG)
             return matches((Long) input.get(0));
 
-        return matches(IP2Long.inet_aton(input.get(0).toString()));
+        return matches(IPHelper.inet_aton(input.get(0).toString()));
     }
 
     public String matches(Long ip) {
@@ -132,11 +133,11 @@ public class IPFilter extends EvalFunc<String> {
 
         if (matcher.group(3) != null)
             return Range.between(
-                    IP2Long.inet_aton(matcher.group(1)),
-                    IP2Long.inet_aton(matcher.group(3))
+                    IPHelper.inet_aton(matcher.group(1)),
+                    IPHelper.inet_aton(matcher.group(3))
             );
         else {
-            Long ip = IP2Long.inet_aton(matcher.group(1));
+            Long ip = IPHelper.inet_aton(matcher.group(1));
             return Range.between(ip, ip);
         }
     }

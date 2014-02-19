@@ -1,9 +1,9 @@
 package com.xeenon.pig;
 
 import com.xeenon.pig.helper.IPHelper;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.pig.EvalFunc;
 import org.apache.pig.PigException;
+import org.apache.pig.data.DataType;
 import org.apache.pig.data.Tuple;
 
 import java.io.IOException;
@@ -11,18 +11,18 @@ import java.io.IOException;
 /**
  * Created with IntelliJ IDEA.
  * User: xeenon
- * Date: 10.10.12
- * Time: 18:26
+ * Date: 19.02.14
+ * Time: 15:33
  */
-public class IP2Long extends EvalFunc<Long> {
+public class Long2IP extends EvalFunc<String> {
 
     @Override
-    public Long exec(Tuple input) throws IOException {
-        if (input == null || input.size() != 1 || input.isNull(0))
+    public String exec(Tuple input) throws IOException {
+        if (input == null || input.size() != 1 || input.isNull(0) || input.getType(0) != DataType.LONG)
             return null;
 
         try {
-            return IPHelper.inet_aton(input.get(0).toString());
+            return IPHelper.inet_ntoa(Long.valueOf(input.get(0).toString()));
         } catch(Exception e) {
             String msg = String.format(
                     "%s got %s on \"%s\"",
