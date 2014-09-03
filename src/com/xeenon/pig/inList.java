@@ -16,7 +16,7 @@ import org.apache.pig.data.Tuple;
 
 public class inList extends FilterFunc
 {
-    private HashSet<String> idList;
+    private final HashSet<String> idList = new HashSet<>();
     private java.lang.String cacheFile;
 
     public inList(java.lang.String sFilterFile) throws IOException
@@ -37,7 +37,6 @@ public class inList extends FilterFunc
 
     public inList(java.lang.String ids, java.lang.String separator) throws IOException
     {
-        idList = new HashSet<>();
         if (ids == null)
             throw new IOException(this.getClass().getCanonicalName() +": got null as ids");
 
