@@ -151,7 +151,7 @@ public class IPFilter extends EvalFunc<String> {
             }
 
             Schema.FieldSchema inputFieldSchema = inputSchema.getField(0);
-            if (inputFieldSchema.type != DataType.CHARARRAY || inputFieldSchema.type != DataType.LONG) {
+            if (inputFieldSchema.type != DataType.CHARARRAY && inputFieldSchema.type != DataType.LONG) {
                 throw new RuntimeException("Expecting a CHARARRAY or LONG, found data type: " +
                         DataType.findTypeName(inputFieldSchema.type));
             }
