@@ -1,6 +1,7 @@
 package com.xeenon.pig;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -9,10 +10,12 @@ import java.util.List;
 import java.util.Arrays;
 
 import com.xeenon.pig.helper.CacheHelper;
+import org.apache.hadoop.conf.Configuration;
 import org.apache.pig.FilterFunc;
 import org.apache.pig.PigException;
 import org.apache.pig.backend.executionengine.ExecException;
 import org.apache.pig.data.Tuple;
+import org.apache.pig.impl.util.UDFContext;
 
 public class inList extends FilterFunc
 {
@@ -22,6 +25,14 @@ public class inList extends FilterFunc
     public inList(java.lang.String sFilterFile) throws IOException
     {
         cacheFile = CacheHelper.parseCacheFile(sFilterFile);
+
+        Configuration conf = UDFContext.getUDFContext().getJobConf();
+        if (conf == null) { // local mode?
+            File inFile = new File(sFilterFile);
+            if (!inFile.exists()) {
+                return;
+            }
+        }
 
         FileReader fileReader = new FileReader(cacheFile);
         BufferedReader bufferedReader = new BufferedReader(fileReader);
