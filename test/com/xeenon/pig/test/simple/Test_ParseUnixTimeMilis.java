@@ -20,17 +20,17 @@ public class Test_ParseUnixTimeMilis {
     public TupleFactory tupleFactory = TupleFactory.getInstance();
 
     public Test_ParseUnixTimeMilis() {
-        ips.put("2013-08-22 11", 1377157271l);
-        ips.put("2002-03-05 23", 1015360934l);
-        ips.put("2013-07-25 17", 1374759794l);
-        ips.put("2013-09-07 23", 1378583999l);
-        ips.put("2013-09-08 00", 1378584000l);
-        ips.put("2013-09-08 01", 1378587600l);
-        ips.put("2013-09-08 00", 1378587599l);
-        ips.put("2013-09-11 00", 1378843200l);
-        ips.put("2013-09-16 00", 1379275200l);
-        ips.put("2013-09-19 00", 1379534400l);
-        ips.put("2013-09-24 00", 1379966400l);
+        ips.put("2013-08-22 11 41", 1377157271l);
+        ips.put("2002-03-05 23 42", 1015360934l);
+        ips.put("2013-07-25 17 43", 1374759794l);
+        ips.put("2013-09-07 23 59", 1378583999l);
+        ips.put("2013-09-08 00 00", 1378584000l);
+        ips.put("2013-09-08 01 00", 1378587600l);
+        ips.put("2013-09-08 00 59", 1378587599l);
+        ips.put("2013-09-11 00 00", 1378843200l);
+        ips.put("2013-09-16 00 00", 1379275200l);
+        ips.put("2013-09-19 00 00", 1379534400l);
+        ips.put("2013-09-24 00 00", 1379966400l);
     }
 
     @Test
@@ -44,6 +44,7 @@ public class Test_ParseUnixTimeMilis {
             Tuple expect = tupleFactory.newTuple();
             expect.append(entry.getKey().split(" ")[0]);
             expect.append(Integer.valueOf(entry.getKey().split(" ")[1]));
+            expect.append(Integer.valueOf(entry.getKey().split(" ")[2]));
 
             Assert.assertEquals(expect, result);
         }
