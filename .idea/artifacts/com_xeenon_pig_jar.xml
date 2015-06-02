@@ -3,7 +3,7 @@
     <output-path>$PROJECT_DIR$/out/artifacts/com_xeenon_pig_jar</output-path>
     <root id="archive" name="com.xeenon.pig.jar">
       <element id="module-output" name="pig-udf" />
-      <element id="library" level="project" name="org.apache.commons:commons-lang3:3.1" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/joda-time-2.8.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>
