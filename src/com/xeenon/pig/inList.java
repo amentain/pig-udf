@@ -19,20 +19,25 @@ import org.apache.pig.impl.util.UDFContext;
 
 public class inList extends FilterFunc
 {
-    private final HashSet<String> idList = new HashSet<>();
+    protected final HashSet<String> idList = new HashSet<>();
     private java.lang.String cacheFile;
+    private final boolean fromHDFS;
 
-    public inList(java.lang.String sFilterFile) throws IOException
+    public inList(java.lang.String filterFile) throws IOException
     {
-        cacheFile = CacheHelper.parseCacheFile(sFilterFile);
-
-        Configuration conf = UDFContext.getUDFContext().getJobConf();
-        if (conf == null) { // local mode?
-            File inFile = new File(sFilterFile);
-            if (!inFile.exists()) {
-                return;
-            }
+        if (filterFile.startsWith("hdfs|")) {
+            fromHDFS = true;
+            cacheFile = CacheHelper.parseCacheFile(filterFile.replace("hdfs|", ""));
+        } else {
+            fromHDFS = false;
+            cacheFile = CacheHelper.parseCacheFile(filterFile);
         }
+
+        System.err.println(String.format("[com.xeenon.pig.inList] sFilterFile: %s | cacheFile: %s", filterFile, cacheFile));
+
+        File checkFile = new File(cacheFile);
+        if (!checkFile.exists() || !checkFile.isFile())
+            return;
 
         FileReader fileReader = new FileReader(cacheFile);
         BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -54,17 +59,28 @@ public class inList extends FilterFunc
         if (separator == null)
             throw new IOException(this.getClass().getCanonicalName() +": got null as separator");
 
+        fromHDFS = false;
         for (java.lang.String id : ids.split(separator)) {
             idList.add(id);
         }
     }
 
     @Override
-    public List<java.lang.String> getCacheFiles()
-    {
-        if (cacheFile == null)
+    public List<String> getCacheFiles() {
+        if (!fromHDFS || cacheFile == null)
             return null;
 
+        System.err.println(String.format("Cache: %s", cacheFile));
+        return Arrays.asList(cacheFile);
+    }
+
+    @Override
+    public List<String> getShipFiles() // public List<java.lang.String> getCacheFiles()
+    {
+        if (fromHDFS || cacheFile == null)
+            return null;
+
+        System.err.println(String.format("Ship: %s", cacheFile));
         return Arrays.asList(cacheFile);
     }
 

@@ -23,24 +23,27 @@ public class CacheHelper {
             throw new IOException("CacheHelper: get null as sFilterFile");
         }
 
-        Configuration conf = UDFContext.getUDFContext().getJobConf();
-        if (conf == null) {
-            // running on frontend (pig plan builder?)
+        if (UDFContext.getUDFContext().isFrontend()) // running on frontend (pig plan builder?)
             return sFilterFile;
-        }
 
         File inFile = new File(sFilterFile);
         if (inFile.exists()) {
             return sFilterFile; // localMode ?
         }
 
+        inFile = new File(String.format("./%s", inFile.getName()));
+        if (inFile.exists()) {
+            return inFile.getAbsolutePath();
+        }
+
         try {
             // TODO: fix for local mode
-            // if NullPointerException => Local Mode
+            Configuration conf = UDFContext.getUDFContext().getJobConf();
             Path[] localCache = DistributedCache.getLocalCacheFiles(conf);
 
             Pattern p = Pattern.compile(".*?"+ Pattern.quote(inFile.getName()) + "$");
             for (Path localFile : localCache) {
+                System.err.println("Found in DS:"+ localFile.toUri().getPath());
                 if (p.matcher(localFile.getName()).matches())
                     return localFile.toUri().getPath();
             }
