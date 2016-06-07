@@ -8,6 +8,7 @@ import org.apache.pig.data.DataType;
 import org.apache.pig.PigException;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
@@ -15,12 +16,26 @@ public class ParseUnixTimeMilis extends EvalFunc<Tuple> {
     private static final TupleFactory mTupleFactory = TupleFactory.getInstance();
     private static final DateTimeFormatter dateFormat = DateTimeFormat.forPattern("yyyy-MM-dd");
 
+    private final DateTimeZone timeZone;
+
+    public ParseUnixTimeMilis() {
+        this.timeZone = null;
+    }
+
+    public ParseUnixTimeMilis(String timeZone) {
+        this.timeZone = DateTimeZone.forID(timeZone);
+    }
+
     public Tuple exec(Tuple input) throws PigException {
         if (input == null || input.size() < 1 || input.isNull(0))
             return null;
 
         try {
-            DateTime dt = new DateTime(input.get(0));
+            final DateTime dt;
+            if (timeZone == null)
+                dt = new DateTime(input.get(0));
+            else
+                dt = new DateTime(input.get(0), timeZone);
 
             Tuple output = mTupleFactory.newTuple(3);
             output.set(0, dateFormat.print(dt));
