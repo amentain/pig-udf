@@ -1,8 +1,8 @@
 <component name="libraryTable">
-  <library name="org.apache.pig:pig:0.14.0" type="repository">
-    <properties maven-id="org.apache.pig:pig:0.14.0" />
+  <library name="org.apache.pig:pig:0.15.0" type="repository">
+    <properties maven-id="org.apache.pig:pig:0.15.0" />
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/pig-0.14.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/pig-0.15.0.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/commons-cli-1.2.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/xmlenc-0.52.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/commons-httpclient-3.1.jar!/" />
@@ -44,10 +44,10 @@
       <root url="jar://$PROJECT_DIR$/lib/slf4j-api-1.6.4.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$PROJECT_DIR$/lib/pig-0.14.0-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/pig-0.15.0-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/lib/pig-0.14.0-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/pig-0.15.0-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
