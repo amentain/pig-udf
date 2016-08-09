@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Arrays;
 
 import com.xeenon.pig.helper.CacheHelper;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.pig.FilterFunc;
 import org.apache.pig.PigException;
@@ -44,7 +45,9 @@ public class inList extends FilterFunc
 
         java.lang.String line;
         while ((line = bufferedReader.readLine()) != null) {
-            idList.add(line);
+            String id = StringUtils.trimToNull(line);
+            if (id != null)
+                idList.add(id);
         }
 
         bufferedReader.close();
