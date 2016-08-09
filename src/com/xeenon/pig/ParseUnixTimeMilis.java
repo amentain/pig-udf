@@ -1,6 +1,7 @@
 package com.xeenon.pig;
 
 import org.apache.pig.EvalFunc;
+import org.apache.pig.PigWarning;
 import org.apache.pig.data.Tuple;
 import org.apache.pig.data.TupleFactory;
 import org.apache.pig.impl.logicalLayer.schema.Schema;
@@ -51,10 +52,12 @@ public class ParseUnixTimeMilis extends EvalFunc<Tuple> {
                     input.toString()
                 );
             System.err.println(msg);
-            throw new PigException(msg, e);
+            warn(msg, PigWarning.UDF_WARNING_1);
+            return null;
         }
     }
 
+    @Override
     public Schema outputSchema(Schema input) {
         try {
             Schema parser = new Schema();
@@ -66,5 +69,10 @@ public class ParseUnixTimeMilis extends EvalFunc<Tuple> {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    @Override
+    public boolean allowCompileTimeCalculation() {
+        return true;
     }
 }
