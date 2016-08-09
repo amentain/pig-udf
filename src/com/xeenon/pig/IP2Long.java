@@ -4,7 +4,10 @@ import com.xeenon.pig.helper.IPHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.pig.EvalFunc;
 import org.apache.pig.PigException;
+import org.apache.pig.PigWarning;
+import org.apache.pig.data.DataType;
 import org.apache.pig.data.Tuple;
+import org.apache.pig.impl.logicalLayer.schema.Schema;
 
 import java.io.IOException;
 
@@ -18,7 +21,7 @@ public class IP2Long extends EvalFunc<Long> {
 
     @Override
     public Long exec(Tuple input) throws IOException {
-        if (input == null || input.size() != 1 || input.isNull(0))
+        if (input == null || input.size() == 0 || input.isNull(0))
             return null;
 
         try {
@@ -31,7 +34,18 @@ public class IP2Long extends EvalFunc<Long> {
                     input.toString()
             );
             System.err.println(msg);
-            throw new PigException(msg, e);
+            warn(msg, PigWarning.UDF_WARNING_1);
+            return null;
         }
+    }
+
+    @Override
+    public Schema outputSchema(Schema input) {
+        return new Schema(new Schema.FieldSchema(null, DataType.LONG));
+    }
+
+    @Override
+    public boolean allowCompileTimeCalculation() {
+        return true;
     }
 }
