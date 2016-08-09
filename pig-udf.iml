@@ -8,10 +8,10 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="joda-time:joda-time:2.9.3" level="project" />
+    <orderEntry type="library" name="joda-time:joda-time:2.9.4" level="project" />
     <orderEntry type="library" name="org.apache.hadoop:hadoop-core:1.2.1" level="project" />
     <orderEntry type="library" name="org.codehaus.jackson:jackson-core-asl:1.9.11" level="project" />
     <orderEntry type="library" name="org.apache.pig:pig:0.15.0" level="project" />
-    <orderEntry type="library" name="org.apache.commons:commons-lang3:3.1" level="project" />
+    <orderEntry type="library" name="org.apache.commons:commons-lang3:3.4" level="project" />
   </component>
 </module>
